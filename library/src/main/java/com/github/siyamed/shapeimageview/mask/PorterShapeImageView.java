@@ -7,6 +7,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.AttributeSet;
 
 import com.github.siyamed.shapeimageview.R;
@@ -77,5 +78,14 @@ public class PorterShapeImageView extends PorterImageView {
             matrix.setScale(scale, scale);
             matrix.postTranslate(dx, dy);
         }
+    }
+
+    private void setShapeResId(int resId) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            shape = getResources().getDrawable(resId, null);
+        } else {
+            shape = getResources().getDrawable(resId);
+        }
+        invalidate();
     }
 }
